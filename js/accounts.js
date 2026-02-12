@@ -161,7 +161,7 @@ LMS.Accounts = () => {
 
   return html`<div class="space-y-6">
     <!-- Top Row: Collection Cards -->
-    <div class="grid md-grid-3 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <${LMS.CollectionCard} 
         title="Today's Collection" 
         stats=${todayStats} 
@@ -193,7 +193,7 @@ LMS.Accounts = () => {
 
 
     <!-- Analytics & Expenses Row -->
-    <div class="grid md-grid-2 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <!-- ANALYTICS DASHBOARD -->
       <${LMS.CollectionCard} 
         title="Analytics Dashboard" 
@@ -405,7 +405,7 @@ LMS.Accounts = () => {
              </div>
              
              <!-- Totals: Last 3 Months -->
-             <div class="grid grid-2 gap-2 mt-4 pt-4 border-t">
+             <div class="grid grid-cols-2 gap-2 mt-4 pt-4 border-t">
                 <div class="p-2 bg-gray-50 rounded border text-center">
                    <p class="text-xs text-gray-500">Total Expense (This Month)</p>
                    <p class="font-bold text-red-600">₹${expenses.filter(e => {
@@ -438,7 +438,7 @@ LMS.Accounts = () => {
       <!-- Filter Section -->
       <div class="mb-6 p-4 border border-gray-200 rounded-xl bg-gray-50">
         <h5 class="font-bold text-sm mb-3 text-purple-700">Filter & Sort Dues</h5>
-        <div class="grid grid-2 md-grid-4 gap-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <input class="input-field" placeholder="Search Name/Roll" value=${duesFilter.search} 
             onInput=${e => setDuesFilter({ ...duesFilter, search: e.target.value })} />
           <input class="input-field" type="number" placeholder="Min Due (₹)" value=${duesFilter.minAmount}
