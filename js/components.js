@@ -19,7 +19,7 @@ LMS.PasswordModal = ({ isOpen, onClose, onSuccess, title = "Security Check" }) =
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === 'Adit@7858' || password === '123') {
+    if (password === 'Mantu@123' || password === '123') {
       onSuccess();
       onClose();
       setPassword('');
@@ -340,7 +340,7 @@ LMS.BottomStatusBar = () => {
           activityLog: LMS.DB.localLoad('activityLog') || [],
           timestamp: new Date().toISOString()
         };
-        const fileName = 'magadh_data_backup.json';
+        const fileName = 'maa_saraswati_data_backup.json';
         const fileHandle = await localBackupDir.getFileHandle(fileName, { create: true });
         const writable = await fileHandle.createWritable();
         await writable.write(JSON.stringify(data, null, 2));
