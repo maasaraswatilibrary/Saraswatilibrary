@@ -528,7 +528,7 @@ LMS.CollectionCard = ({ title, stats, isVisible, onToggle, borderColor, requires
   const handleToggle = () => {
     if (!isVisible && requiresPassword) {
       const pwd = prompt('Enter password to view ' + title + ':');
-      if (pwd !== '3565-78') {
+      if (pwd !== '1450') {
         showToast('Incorrect password!', 'error');
         return;
       }
