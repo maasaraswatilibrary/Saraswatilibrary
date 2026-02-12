@@ -89,7 +89,7 @@ LMS.Screensaver = () => {
                         letterSpacing: '0.2em'
                     }
                 },
-                'MAGADH'
+                'MAA SARASWATI'
             ),
             React.createElement(
                 'h2',
