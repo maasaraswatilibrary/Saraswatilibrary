@@ -206,7 +206,7 @@ LMS.Settings = ({ onLogout }) => {
       <div class="space-y-3">
         <${Input} label="Username" value=${passwordForm.username} onChange=${e => setPasswordForm(p => ({ ...p, username: e.target.value }))} />
         <${Input} type="password" label="Current Password (Required)" value=${passwordForm.current} onChange=${e => setPasswordForm(p => ({ ...p, current: e.target.value }))} />
-        <div class="grid grid-2 gap-3">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <${Input} type="password" label="New Password (Optional)" value=${passwordForm.new} onChange=${e => setPasswordForm(p => ({ ...p, new: e.target.value }))} />
             <${Input} type="password" label="Confirm New" value=${passwordForm.confirm} onChange=${e => setPasswordForm(p => ({ ...p, confirm: e.target.value }))} />
         </div>
@@ -367,7 +367,7 @@ LMS.Settings = ({ onLogout }) => {
           <span class="text-sm text-gray-600">Current: ${String(LMS.DB.localLoad('backupDirectoryName') || 'Not set')}</span>
         </div>
         
-        <div class="mt-4 pt-4 border-t">
+        <div class="grid grid-cols-2 gap-2 mt-4 pt-4 border-t">
           <h4 class="font-semibold text-red-600 mb-2">Storage Optimization</h4>
            <div class="flex items-center justify-between">
             <p class="text-xs text-gray-500">Remove photos of students deactivated > 90 days ago.</p>
