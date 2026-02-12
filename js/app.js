@@ -134,12 +134,13 @@ LMS.App = () => {
       setHalls(loadedHalls && loadedHalls.length > 0 ? loadedHalls : LMS.DEFAULT_HALLS);
 
       setShifts(LMS.DB.localLoad('shifts') || LMS.DEFAULT_SHIFTS || []);
+      // Force update settings if they are default
       const savedSettings = LMS.DB.localLoad('settings');
-      let finalSettings = savedSettings ? { ...LMS.DEFAULT_SETTINGS, ...savedSettings } : { ...LMS.DEFAULT_SETTINGS, libraryName: 'MAGADH LIBRARY' };
+      let finalSettings = savedSettings ? { ...LMS.DEFAULT_SETTINGS, ...savedSettings } : { ...LMS.DEFAULT_SETTINGS, libraryName: 'Maa Saraswati Library' };
 
-      // Force update name if it matches old default
-      if (finalSettings.libraryName === 'My Study Library' || finalSettings.libraryName === 'My Study Library Management System') {
-        finalSettings.libraryName = 'MAGADH LIBRARY';
+      // Ensure library name is set if missing
+      if (!finalSettings.libraryName || finalSettings.libraryName === 'My Study Library') {
+        finalSettings.libraryName = 'Maa Saraswati Library';
       }
       setSettings(finalSettings);
       setActivityLog(LMS.DB.localLoad('activityLog') || []);
