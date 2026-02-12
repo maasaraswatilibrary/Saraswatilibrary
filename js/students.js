@@ -803,7 +803,7 @@ LMS.StudentManagement = () => {
 
   const handleDelete = (s) => {
     const pwd = prompt('Enter password to delete student:');
-    if (pwd !== 'Adit@7858') {
+    if (pwd !== 'Mantu@123') {
       showToast('Incorrect password!', 'error');
       return;
     }
