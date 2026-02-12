@@ -5,86 +5,86 @@ window.LMS = window.LMS || {};
 window.LMS = window.LMS || {};
 
 LMS.LoginPage = ({ onLogin }) => {
-  const [mode, setMode] = useState('login');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
-  const [securityAnswer, setSecurityAnswer] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [firebaseUser, setFirebaseUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+    const [mode, setMode] = useState('login');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState('');
+    const [securityAnswer, setSecurityAnswer] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [firebaseUser, setFirebaseUser] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-  const owner = LMS.DB.localLoad('owner') || LMS.DEFAULT_OWNER;
-  const { Button, Input, Card, Icons } = LMS;
+    const owner = LMS.DB.localLoad('owner') || LMS.DEFAULT_OWNER;
+    const { Button, Input, Card, Icons } = LMS;
 
-  // Background Animation
-  useEffect(() => {
-    // Add particle effect logic here if needed, or rely on CSS animations
-  }, []);
+    // Background Animation
+    useEffect(() => {
+        // Add particle effect logic here if needed, or rely on CSS animations
+    }, []);
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Simulate loading for effect
-    setLoading(true);
-    setTimeout(() => {
-      if (username === owner.username && password === owner.password) {
-        LMS.DB.localSave('session', { loggedIn: true, timestamp: Date.now() });
-        onLogin();
-      } else {
-        setError('Invalid credentials! Access denied.');
-        setLoading(false);
-      }
-    }, 800);
-  };
+    const handleLogin = (e) => {
+        e.preventDefault();
+        // Simulate loading for effect
+        setLoading(true);
+        setTimeout(() => {
+            if (username === owner.username && password === owner.password) {
+                LMS.DB.localSave('session', { loggedIn: true, timestamp: Date.now() });
+                onLogin();
+            } else {
+                setError('Invalid credentials! Access denied.');
+                setLoading(false);
+            }
+        }, 800);
+    };
 
-  const handleReset = (e) => {
-    e.preventDefault();
-    if (securityAnswer.toLowerCase() === owner.securityAnswer.toLowerCase()) {
-      const updated = { ...owner, password: newPassword };
-      LMS.DB.localSave('owner', updated);
-      LMS.DB.save('owner', updated);
-      setMode('login');
-      setError('');
-      alert('Password reset successful!');
-    } else {
-      setError('Wrong security answer!');
-    }
-  };
+    const handleReset = (e) => {
+        e.preventDefault();
+        if (securityAnswer.toLowerCase() === owner.securityAnswer.toLowerCase()) {
+            const updated = { ...owner, password: newPassword };
+            LMS.DB.localSave('owner', updated);
+            LMS.DB.save('owner', updated);
+            setMode('login');
+            setError('');
+            alert('Password reset successful!');
+        } else {
+            setError('Wrong security answer!');
+        }
+    };
 
-  const handleGoogleSignIn = async () => {
-    if (!LMS.DB.isConfigured) {
-      setError('Firebase not configured. Add your config in js/firebase-db.js');
-      return;
-    }
-    setLoading(true);
-    const user = await LMS.DB.signInWithGoogle();
-    if (user) {
-      setFirebaseUser(user);
-      setError('');
-      try {
-        await LMS.DB.syncCloudToLocal();
-        window.location.reload();
-      } catch (e) {
-        console.error('Sync error:', e);
-        setLoading(false);
-      }
-    } else {
-      setError('Google sign-in failed.');
-      setLoading(false);
-    }
-  };
+    const handleGoogleSignIn = async () => {
+        if (!LMS.DB.isConfigured) {
+            setError('Firebase not configured. Add your config in js/firebase-db.js');
+            return;
+        }
+        setLoading(true);
+        const user = await LMS.DB.signInWithGoogle();
+        if (user) {
+            setFirebaseUser(user);
+            setError('');
+            try {
+                await LMS.DB.syncCloudToLocal();
+                window.location.reload();
+            } catch (e) {
+                console.error('Sync error:', e);
+                setLoading(false);
+            }
+        } else {
+            setError('Google sign-in failed.');
+            setLoading(false);
+        }
+    };
 
-  return html`
+    return html`
     <div class="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-gray-900">
         <!-- Dynamic Background -->
         <div class="absolute inset-0 z-0">
             <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-[#1a1a2e] to-[#4b0082] opacity-90"></div>
             <div class="absolute inset-0 opacity-30" 
                  style=${{
-      backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(79, 70, 229, 0.4) 0%, transparent 50%)',
-      animation: 'shimmer 10s infinite linear'
-    }}>
+            backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(79, 70, 229, 0.4) 0%, transparent 50%)',
+            animation: 'shimmer 10s infinite linear'
+        }}>
             </div>
             <!-- Floating Orbs -->
             <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
@@ -107,12 +107,12 @@ LMS.LoginPage = ({ onLogin }) => {
                             <span class="text-5xl transform group-hover:scale-110 transition-transform duration-300">📚</span>
                         </div>
                     </div>
-                    
-                    <h1 class="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-100 to-yellow-400 mb-2 drop-shadow-sm tracking-tight"
-                        style=${{ fontFamily: "'Inter', sans-serif" }}>
-                        MAGADH
-                    </h1>
-                    <p class="text-indigo-200 tracking-[0.3em] text-sm uppercase font-bold text-shadow-sm">Library System</p>
+                    <div class="mb-8 animate-float">
+                        <h1 class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-purple-200 filter drop-shadow-lg tracking-tighter">
+                        MAA SARASWATI
+                        </h1>
+                        <p class="text-indigo-200 tracking-[0.3em] text-sm uppercase font-bold text-shadow-sm">Library System</p>
+                    </div>
                 </div>
 
                 ${mode === 'login' ? html`
@@ -238,10 +238,10 @@ LMS.LoginPage = ({ onLogin }) => {
                 `}
             </div>
             
-            <p class="text-center text-gray-500 text-xs mt-8 opacity-60">
-                &copy; 2024 Magadh Library. All Rights Reserved. <br/>
-                Protected by secure authentication.
-            </p>
+            <div class="mt-8 text-center text-gray-500 text-xs">
+                &copy; 2024 Maa Saraswati Library. All Rights Reserved. <br/>
+                <span class="opacity-50">Designed for Excellence</span>
+            </div>
         </div>
     </div>
   `;
