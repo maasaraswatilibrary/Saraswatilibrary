@@ -124,7 +124,7 @@ LMS.App = () => {
       const session = LMS.DB.localLoad('session');
       if (session?.loggedIn) setIsLoggedIn(true);
 
-      if (!LMS.DB.localLoad('owner')) LMS.DB.localSave('owner', { ...LMS.DEFAULT_OWNER, libraryName: 'MAGADH LIBRARY' });
+      if (!LMS.DB.localLoad('owner')) LMS.DB.localSave('owner', { ...LMS.DEFAULT_OWNER, libraryName: 'Maa Saraswati Library' });
 
       // Load from local first (instant)
       setStudents(LMS.DB.localLoad('students') || []);
@@ -138,9 +138,11 @@ LMS.App = () => {
       const savedSettings = LMS.DB.localLoad('settings');
       let finalSettings = savedSettings ? { ...LMS.DEFAULT_SETTINGS, ...savedSettings } : { ...LMS.DEFAULT_SETTINGS, libraryName: 'Maa Saraswati Library' };
 
-      // Ensure library name is set if missing
-      if (!finalSettings.libraryName || finalSettings.libraryName === 'My Study Library') {
+      // Ensure library name is set if missing OR if it is the old default
+      if (!finalSettings.libraryName || finalSettings.libraryName === 'My Study Library' || finalSettings.libraryName === 'MAGADH LIBRARY') {
         finalSettings.libraryName = 'Maa Saraswati Library';
+        // Force save to local storage immediately to persist the change
+        LMS.DB.localSave('settings', finalSettings);
       }
       setSettings(finalSettings);
       setActivityLog(LMS.DB.localLoad('activityLog') || []);
